@@ -34,12 +34,20 @@
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
+    # The Aspire CLI ships from Microsoft's own tap, not homebrew-core.
+    # Declaring the tap here keeps `cleanup = "zap"` from untapping it.
+    taps = [
+      "microsoft/aspire"
+    ];
     brews = [
       "herdr"
     ];
     casks = [
       "wezterm"
       "claude-code"
+      # Fully qualified so Homebrew trusts this non-official tap's cask
+      # during activation (HOMEBREW_REQUIRE_TAP_TRUST).
+      "microsoft/aspire/aspire"
     ];
   };
 }
