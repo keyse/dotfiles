@@ -163,6 +163,8 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 brew install --cask kunchenguid/tap/pi-launcher
 ```
 
+Because neither `kunchenguid/tap` nor the `pi-launcher` cask is declared in `configuration.nix`, and `homebrew.onActivation.cleanup = "zap"` removes everything Homebrew-managed that the config does not declare, the next `./rebuild.sh` uninstalls Pi Launcher and untaps `kunchenguid/tap`. To keep it across rebuilds, add the tap and the cask to `configuration.nix` yourself. The npm-installed Pi CLI above is unaffected - Homebrew cleanup does not touch npm global packages.
+
 Home Manager owns exactly two repository-authored Pi directories: `~/.pi/agent/themes` and `~/.pi/agent/extensions`. It also links `models.json` and `settings.json` as individual files. The local extension directory is for public, repository-authored extensions only - third-party package code never belongs there. Run `/reload` after editing a local extension or other Pi resources. The terminal-title extension shows a spinner while Pi is working, then a completion mark with the session name or current directory. The `rose-pine-moon` theme was authored clean-room from the public [Rosé Pine Moon palette](https://rosepinetheme.com/palette) and Pi's [public theme schema](https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json), not from a private or live theme file.
 
 ### Pi Calm
