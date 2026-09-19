@@ -24,6 +24,10 @@ in
   home.sessionVariables.EDITOR = "nvim";
   home.sessionPath = [
     "${config.home.homeDirectory}/.npm-global/bin"
+    # .NET SDK and its global tools (dotnet, aspire) - installed outside Nix
+    # by the official installer, so their paths have to be declared here.
+    "/usr/local/share/dotnet"
+    "${config.home.homeDirectory}/.dotnet/tools"
   ];
 
   # nodejs in the Nix store is read-only, so `npm install -g` fails with
