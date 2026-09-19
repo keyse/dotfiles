@@ -53,6 +53,7 @@
       "azure/functions"
     ];
     brews = [
+      "gh"
       "herdr"
       # Fully qualified for the same tap-trust reason as the casks below.
       "azure/functions/azure-functions-core-tools@4"
