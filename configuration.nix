@@ -35,11 +35,20 @@
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
-    # The Aspire CLI, Pi Launcher and Azure Functions Core Tools ship from
-    # their owners' own taps, not homebrew-core. Declaring the taps here keeps
+    # Pi Launcher and Azure Functions Core Tools ship from their owners' own
+    # taps, not homebrew-core. Declaring the taps here keeps
     # `cleanup = "zap"` from untapping them.
+    #
+    # microsoft/aspire is deliberately NOT here. Its cask calls `write_file`
+    # inside `postflight_steps`, which Homebrew 6.0.1 does not define, so
+    # tapping it aborts the whole activation:
+    #   Error: Cask 'aspire' definition is invalid:
+    #     undefined method 'write_file' for an instance of
+    #     Homebrew::InstallSteps::DSL
+    # Until that cask works on current Homebrew, the Aspire CLI comes from
+    # `dotnet tool install -g aspire.cli` instead, which home.sessionPath
+    # already puts on PATH. Retry the cask once upstream fixes it.
     taps = [
-      "microsoft/aspire"
       "kunchenguid/tap"
       "azure/functions"
     ];
@@ -51,9 +60,8 @@
     casks = [
       "wezterm"
       "claude-code"
-      # Fully qualified so Homebrew trusts these non-official taps' casks
+      # Fully qualified so Homebrew trusts this non-official tap's cask
       # during activation (HOMEBREW_REQUIRE_TAP_TRUST).
-      "microsoft/aspire/aspire"
       "kunchenguid/tap/pi-launcher"
     ];
   };

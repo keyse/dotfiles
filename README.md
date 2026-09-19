@@ -122,9 +122,10 @@ Read through `taps`, `brews`, and `casks` before you run `bootstrap.sh` or `rebu
 It's a real public Homebrew formula (`brew info herdr` finds it in homebrew-core, no tap needed), so it will install fine.
 If you don't use it, just remove it from `brews` in your copy.
 
-**About the Aspire CLI:** it's the `microsoft/aspire/aspire` entry in `casks`, installed the way the [official install docs](https://aspire.dev/get-started/install-cli/) recommend for macOS.
-It comes from Microsoft's own tap rather than homebrew-core, which is why `microsoft/aspire` is listed in `taps`.
-If you don't use it, remove both entries from your copy.
+**About the Aspire CLI:** it is *not* installed through Homebrew, despite what the [official install docs](https://aspire.dev/get-started/install-cli/) recommend for macOS.
+Microsoft's `microsoft/aspire` cask calls `write_file` inside `postflight_steps`, which Homebrew 6.0.1 does not define, and tapping it aborts the whole `darwin-rebuild` activation.
+Until that is fixed upstream, install it with `dotnet tool install -g aspire.cli`; `home.sessionPath` already puts `~/.dotnet/tools` on PATH.
+If you don't use it, skip that install.
 
 **About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
 
