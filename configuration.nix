@@ -20,7 +20,7 @@
       _HIHideMenuBar = true;  # auto-hide the menu bar
       AppleShowAllExtensions = true;
     };
-    dock.autohide = true;
+    dock.autohide = false;
     finder.FXPreferredViewStyle = "Nlsv";  # list view by default
     finder.CreateDesktop = false;          # clean desktop
     trackpad.Clicking = true;              # tap to click
@@ -28,6 +28,7 @@
   nix-homebrew = {
     enable = true;
     inherit user;
+    autoMigrate = true;
   };
   homebrew = {
     enable = true;
@@ -43,6 +44,7 @@
     ];
     brews = [
       "herdr"
+      "gh"
     ];
     casks = [
       "wezterm"

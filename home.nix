@@ -16,11 +16,24 @@ in
     jq        # json on the command line
     lazygit
     neovim
+    nodejs_22 # runtime for npm-installed CLIs (e.g. lavish-axi)
     # the font everything renders in
     nerd-fonts.hack
   ];
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.npm-global/bin"
+  ];
+
+  # nodejs in the Nix store is read-only, so `npm install -g` fails with
+  # EACCES trying to write next to the node binary. Redirect npm's global
+  # prefix into a writable spot in $HOME. Done via .npmrc rather than
+  # NPM_CONFIG_PREFIX because npm reads this file regardless of whether
+  # the shell sourced home-manager's session vars.
+  home.file.".npmrc".text = ''
+    prefix=${config.home.homeDirectory}/.npm-global
+  '';
 
   programs.zsh = {
     enable = true;
