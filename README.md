@@ -126,6 +126,8 @@ If you don't use it, just remove it from `brews` in your copy.
 It comes from Microsoft's own tap rather than homebrew-core, which is why `microsoft/aspire` is listed in `taps`.
 If you don't use it, remove both entries from your copy.
 
+**About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
+
 **Heads-up:**
 
 - `home/AGENTS.md` is my personal agent policy, and `home.nix` installs it for Claude, Codex, and opencode.
@@ -157,13 +159,9 @@ Pi is an opt-in CLI, not a dependency this repository vendors. Install it from i
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-[Pi Launcher](https://github.com/kunchenguid/homebrew-tap) is also optional and installed from its owner, not declared by this config:
+[Pi Launcher](https://github.com/kunchenguid/homebrew-tap) ships from its owner's tap rather than homebrew-core, and this config declares it: `kunchenguid/tap` is in `homebrew.taps` and `kunchenguid/tap/pi-launcher` is in `homebrew.casks` in `configuration.nix`. `./rebuild.sh` installs it like every other Homebrew package here, and because `homebrew.onActivation.cleanup = "zap"` only removes Homebrew-managed things the config does not declare, later rebuilds keep it. You do not need a one-off `brew install`.
 
-```sh
-brew install --cask kunchenguid/tap/pi-launcher
-```
-
-Because neither `kunchenguid/tap` nor the `pi-launcher` cask is declared in `configuration.nix`, and `homebrew.onActivation.cleanup = "zap"` removes everything Homebrew-managed that the config does not declare, the next `./rebuild.sh` uninstalls Pi Launcher and untaps `kunchenguid/tap`. To keep it across rebuilds, add the tap and the cask to `configuration.nix` yourself. The npm-installed Pi CLI above is unaffected - Homebrew cleanup does not touch npm global packages.
+If you do not want Pi Launcher, remove both entries from your own copy of `configuration.nix`; the next `./rebuild.sh` then uninstalls it and untaps `kunchenguid/tap`. Either way the npm-installed Pi CLI above is unaffected - Homebrew cleanup does not touch npm global packages.
 
 Home Manager owns exactly two repository-authored Pi directories: `~/.pi/agent/themes` and `~/.pi/agent/extensions`. It also links `models.json` and `settings.json` as individual files. The local extension directory is for public, repository-authored extensions only - third-party package code never belongs there. Run `/reload` after editing a local extension or other Pi resources. The terminal-title extension shows a spinner while Pi is working, then a completion mark with the session name or current directory. The `rose-pine-moon` theme was authored clean-room from the public [Rosé Pine Moon palette](https://rosepinetheme.com/palette) and Pi's [public theme schema](https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json), not from a private or live theme file.
 
@@ -184,7 +182,7 @@ The versions are immutable pins, so Pi does not move them during package updates
 
 Both packages execute with your full user permissions and must be trusted like any other executable code.
 
-Home Manager deliberately does not manage `~/.pi/agent` itself, or Pi authentication, sessions, trust decisions, caches, npm/git package trees, or any other runtime state. The model overrides contain no credentials or endpoint settings, do not choose a default model, and only take effect after you authenticate Pi yourself. This remains an additive post-video layer: it does not install Pi, a launcher, or package source code into this repository.
+Home Manager deliberately does not manage `~/.pi/agent` itself, or Pi authentication, sessions, trust decisions, caches, npm/git package trees, or any other runtime state. The model overrides contain no credentials or endpoint settings, do not choose a default model, and only take effect after you authenticate Pi yourself. This remains an additive post-video layer: it does not install Pi or package source code into this repository. Pi Launcher is installed by the Homebrew block in `configuration.nix`, not by Home Manager.
 
 ## Notes
 

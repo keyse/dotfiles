@@ -34,10 +34,12 @@
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
-    # The Aspire CLI ships from Microsoft's own tap, not homebrew-core.
-    # Declaring the tap here keeps `cleanup = "zap"` from untapping it.
+    # The Aspire CLI and Pi Launcher ship from their owners' own taps, not
+    # homebrew-core. Declaring the taps here keeps `cleanup = "zap"` from
+    # untapping them.
     taps = [
       "microsoft/aspire"
+      "kunchenguid/tap"
     ];
     brews = [
       "herdr"
@@ -45,9 +47,10 @@
     casks = [
       "wezterm"
       "claude-code"
-      # Fully qualified so Homebrew trusts this non-official tap's cask
+      # Fully qualified so Homebrew trusts these non-official taps' casks
       # during activation (HOMEBREW_REQUIRE_TAP_TRUST).
       "microsoft/aspire/aspire"
+      "kunchenguid/tap/pi-launcher"
     ];
   };
 }
