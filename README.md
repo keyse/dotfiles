@@ -126,6 +126,8 @@ If you don't use it, just remove it from `brews` in your copy.
 It comes from Microsoft's own tap rather than homebrew-core, which is why `microsoft/aspire` is listed in `taps`.
 If you don't use it, remove both entries from your copy.
 
+**About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
+
 **Heads-up:**
 
 - `home/AGENTS.md` is my personal agent policy, and `home.nix` installs it for Claude, Codex, and opencode.
