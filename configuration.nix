@@ -20,7 +20,7 @@
       _HIHideMenuBar = true;  # auto-hide the menu bar
       AppleShowAllExtensions = true;
     };
-    dock.autohide = false;
+    dock.autohide = true;
     finder.FXPreferredViewStyle = "Nlsv";  # list view by default
     finder.CreateDesktop = false;          # clean desktop
     trackpad.Clicking = true;              # tap to click
@@ -35,16 +35,18 @@
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
-    # The Aspire CLI and Pi Launcher ship from their owners' own taps, not
-    # homebrew-core. Declaring the taps here keeps `cleanup = "zap"` from
-    # untapping them.
+    # The Aspire CLI, Pi Launcher and Azure Functions Core Tools ship from
+    # their owners' own taps, not homebrew-core. Declaring the taps here keeps
+    # `cleanup = "zap"` from untapping them.
     taps = [
       "microsoft/aspire"
       "kunchenguid/tap"
+      "azure/functions"
     ];
     brews = [
       "herdr"
-      "gh"
+      # Fully qualified for the same tap-trust reason as the casks below.
+      "azure/functions/azure-functions-core-tools@4"
     ];
     casks = [
       "wezterm"
