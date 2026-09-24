@@ -127,6 +127,10 @@ Microsoft's `microsoft/aspire` cask calls `write_file` inside `postflight_steps`
 Until that is fixed upstream, install it with `dotnet tool install -g aspire.cli`; `home.sessionPath` already puts `~/.dotnet/tools` on PATH.
 If you don't use it, skip that install.
 
+**About Claude Code:** the `casks` list names `claude-code@latest`, not plain `claude-code`.
+The plain cask follows Anthropic's stable release channel, which can sit several releases behind what is actually published - far enough to strand you below a version floor that a Claude Code feature requires.
+The versioned cask tracks the published releases instead, so a rebuild keeps you current.
+
 **About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
 
 **Heads-up:**
