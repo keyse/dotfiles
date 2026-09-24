@@ -63,8 +63,9 @@
       # The versioned cask, not plain `claude-code`. The plain cask follows
       # Anthropic's stable release channel, which can sit many builds behind
       # what is actually published - far enough to strand you below a version
-      # floor a Claude Code feature needs. `claude-code@latest` tracks the
-      # published releases instead. Do not simplify it back.
+      # floor a Claude Code feature needs. `claude-code@latest` installs the
+      # newest published release instead. A rebuild does not upgrade an
+      # existing install; that takes `brew upgrade`. Do not simplify it back.
       "claude-code@latest"
       # Fully qualified so Homebrew trusts this non-official tap's cask
       # during activation (HOMEBREW_REQUIRE_TAP_TRUST).
