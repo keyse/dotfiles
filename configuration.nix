@@ -34,6 +34,7 @@
     enable = true;
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
+    onActivation.upgrade = true;  # every rebuild upgrades all declared casks and brews
     onActivation.extraFlags = [ "--force" ];
     # Pi Launcher and Azure Functions Core Tools ship from their owners' own
     # taps, not homebrew-core. Declaring the taps here keeps
@@ -64,8 +65,8 @@
       # Anthropic's stable release channel, which can sit many builds behind
       # what is actually published - far enough to strand you below a version
       # floor a Claude Code feature needs. `claude-code@latest` installs the
-      # newest published release instead. A rebuild does not upgrade an
-      # existing install; that takes `brew upgrade`. Do not simplify it back.
+      # newest published release instead, and `onActivation.upgrade` moves an
+      # existing install forward on every rebuild. Do not simplify it back.
       "claude-code@latest"
       # Fully qualified so Homebrew trusts this non-official tap's cask
       # during activation (HOMEBREW_REQUIRE_TAP_TRUST).
