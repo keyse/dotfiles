@@ -129,7 +129,7 @@ If you don't use it, skip that install.
 
 **About Claude Code:** the `casks` list names `claude-code@latest`, not plain `claude-code`.
 The plain cask follows Anthropic's stable release channel, which can sit several releases behind what is actually published - far enough to strand you below a version floor that a Claude Code feature requires.
-The versioned cask installs the newest published release instead, but a rebuild only installs it when it is missing and never upgrades an existing copy - run `brew upgrade --cask claude-code@latest` to move to a newer release.
+The versioned cask installs the newest published release instead, and because `configuration.nix` sets `homebrew.onActivation.upgrade = true`, every `./rebuild.sh` upgrades an existing copy (and every other declared cask and brew) to the newest release.
 The two casks conflict, so if you still have plain `claude-code` installed, run `brew uninstall --cask claude-code` before your next rebuild (not `--zap`, which also trashes `~/.claude.json` and other Claude Code state).
 
 **About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
