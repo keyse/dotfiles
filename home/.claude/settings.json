@@ -1,20 +1,53 @@
 {
-  "statusLine": {
-    "type": "command",
-    "command": "input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name'); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); if [ -n \"$used\" ]; then printf \"%s | ctx: %.0f%% used\" \"$model\" \"$used\"; else printf \"%s\" \"$model\"; fi"
+  "permissions": {
+    "defaultMode": "auto"
   },
-  "skipDangerousModePermissionPrompt": true,
-  "theme": "dark-ansi",
-  "modelSettings": {
-    "claude-opus-5": {
-      "effortLevel": "low"
-    }
-  },
-  "enabledPlugins": {
-    "mattpocock-skills@claude-plugins-official": true,
-    "show-me@skills": true,
-    "devprocess-skills@devprocess": true,
-    "csharp-lsp@claude-plugins-official": true
+  "model": "opus[1m]",
+  "skillOverrides": {
+    "agents-sdk": "off",
+    "animate": "off",
+    "animate-expo": "off",
+    "animation-vocabulary": "off",
+    "apple-design": "off",
+    "ask-sonner": "off",
+    "axi": "off",
+    "cloudflare-email-service": "off",
+    "cloudflare-one-migrations": "off",
+    "design-taste-frontend": "off",
+    "durable-objects": "off",
+    "emil-design-eng": "off",
+    "find-animation-opportunities": "off",
+    "find-skills": "off",
+    "git-guardrails-claude-code": "off",
+    "improve-animations": "off",
+    "microsoft-foundry": "off",
+    "migrate-to-shoehorn": "off",
+    "nextjs-on-cloudflare": "off",
+    "pinescript-alerts": "off",
+    "pines": "off",
+    "sandbox-migrate-to-next": "off",
+    "sandbox-next": "off",
+    "sandbox-stable": "off",
+    "scaffold-exercises": "off",
+    "setup-pre-commit": "off",
+    "turnstile-spin": "off",
+    "web-perf": "off",
+    "workers-best-practices": "off",
+    "write-swift": "off",
+    "writing-great-skills": "off",
+    "chief-of-staff": "off",
+    "claude-handoff": "off",
+    "implement": "off",
+    "implement-spec": "off",
+    "loop-me": "off",
+    "pick-ui-library": "off",
+    "review-animations": "off",
+    "setup-ts-deep-modules": "off",
+    "teach": "off",
+    "writing-beats": "off",
+    "writing-fragments": "off",
+    "writing-shape": "off",
+    "review": "off"
   },
   "hooks": {
     "SessionStart": [
@@ -24,7 +57,8 @@
           {
             "type": "command",
             "command": "gh-axi",
-            "timeout": 10
+            "timeout": 10,
+            "async": true
           }
         ]
       },
@@ -38,6 +72,53 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": [
+              "/Users/mohamoudibrahim/.aspire/hooks/track-telemetry.sh"
+            ],
+            "timeout": 30
+          }
+        ]
+      }
     ]
-  }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name'); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); if [ -n \"$used\" ]; then printf \"%s | ctx: %.0f%% used\" \"$model\" \"$used\"; else printf \"%s\" \"$model\"; fi"
+  },
+  "enabledPlugins": {
+    "show-me@skills": true,
+    "devprocess-skills@devprocess": true,
+    "csharp-lsp@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "data@synced": false,
+    "pstack@cursor-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "cursor-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "cursor/plugins"
+      }
+    }
+  },
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium",
+      "autoCompactWindow": 300000
+    }
+  },
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "auto"
 }

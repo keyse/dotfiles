@@ -127,13 +127,12 @@ If you don't use it, just remove it from `brews` in your copy.
 
 **About the Aspire CLI:** it is *not* installed through Homebrew, despite what the [official install docs](https://aspire.dev/get-started/install-cli/) recommend for macOS.
 Microsoft's `microsoft/aspire` cask calls `write_file` inside `postflight_steps`, which Homebrew 6.0.1 does not define, and tapping it aborts the whole `darwin-rebuild` activation.
-Until that is fixed upstream, install it with `dotnet tool install -g aspire.cli`; `home.sessionPath` already puts `~/.dotnet/tools` on PATH.
+Until that is fixed upstream, install it with the script from the same docs (`curl -sSL https://aspire.dev/install.sh | bash`), which puts it in `~/.aspire/bin`; `home.sessionPath` already puts that folder on PATH.
 If you don't use it, skip that install.
 
-**About Claude Code:** the `casks` list names `claude-code@latest`, not plain `claude-code`.
-The plain cask follows Anthropic's stable release channel, which can sit several releases behind what is actually published - far enough to strand you below a version floor that a Claude Code feature requires.
-The versioned cask installs the newest published release instead, and every `./rebuild.sh` upgrades an existing copy (see the Homebrew upgrade note above).
-The two casks conflict, so if you still have plain `claude-code` installed, run `brew uninstall --cask claude-code` before your next rebuild (not `--zap`, which also trashes `~/.claude.json` and other Claude Code state).
+**About Claude Code:** it is *not* a Homebrew cask here.
+Install it with the native installer from the [quickstart](https://code.claude.com/docs/en/quickstart) (`curl -fsSL https://claude.ai/install.sh | bash`), which puts it in `~/.local/bin` (already on PATH via `home.sessionPath`) and updates itself in the background; run `claude update` to update right away.
+If a `claude-code` or `claude-code@latest` cask is still installed, run `brew uninstall --cask <that cask>` before your next rebuild: `cleanup = "zap"` would otherwise zap it, which also trashes `~/.claude.json` and other Claude Code state.
 
 **About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
 

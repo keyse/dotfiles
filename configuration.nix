@@ -20,7 +20,7 @@
       _HIHideMenuBar = true;  # auto-hide the menu bar
       AppleShowAllExtensions = true;
     };
-    dock.autohide = true;
+    dock.autohide = false;
     finder.FXPreferredViewStyle = "Nlsv";  # list view by default
     finder.CreateDesktop = false;          # clean desktop
     trackpad.Clicking = true;              # tap to click
@@ -36,8 +36,8 @@
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;  # every rebuild upgrades all declared casks and brews
     onActivation.extraFlags = [ "--force" ];
-    # Pi Launcher and Azure Functions Core Tools ship from their owners' own
-    # taps, not homebrew-core. Declaring the taps here keeps
+    # Pi Launcher, Azure Functions Core Tools and tsk ship from their owners'
+    # own taps, not homebrew-core. Declaring the taps here keeps
     # `cleanup = "zap"` from untapping them.
     #
     # microsoft/aspire is deliberately NOT here. Its cask calls `write_file`
@@ -47,27 +47,22 @@
     #     undefined method 'write_file' for an instance of
     #     Homebrew::InstallSteps::DSL
     # Until that cask works on current Homebrew, the Aspire CLI comes from
-    # `dotnet tool install -g aspire.cli` instead, which home.sessionPath
-    # already puts on PATH. Retry the cask once upstream fixes it.
+    # its install script (into ~/.aspire/bin), which home.sessionPath puts on
+    # PATH. Retry the cask once upstream fixes it.
     taps = [
       "kunchenguid/tap"
       "azure/functions"
+      "smarzban/tap"
     ];
     brews = [
       "gh"
       "herdr"
       # Fully qualified for the same tap-trust reason as the casks below.
       "azure/functions/azure-functions-core-tools@4"
+      "smarzban/tap/tsk"
     ];
     casks = [
       "wezterm"
-      # The versioned cask, not plain `claude-code`. The plain cask follows
-      # Anthropic's stable release channel, which can sit many builds behind
-      # what is actually published - far enough to strand you below a version
-      # floor a Claude Code feature needs. `claude-code@latest` installs the
-      # newest published release instead, and `onActivation.upgrade` moves an
-      # existing install forward on every rebuild. Do not simplify it back.
-      "claude-code@latest"
       # Fully qualified so Homebrew trusts this non-official tap's cask
       # during activation (HOMEBREW_REQUIRE_TAP_TRUST).
       "kunchenguid/tap/pi-launcher"
