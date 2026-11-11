@@ -118,6 +118,9 @@ That means every time you switch, Homebrew removes any package or cask on your m
 If you already have Homebrew stuff installed that isn't in that list, the first switch will uninstall it (and untap any tap nothing listed needs).
 Read through `taps`, `brews`, and `casks` before you run `bootstrap.sh` or `rebuild.sh` for the first time, and add anything you want to keep.
 
+**Homebrew upgrade note:** `configuration.nix` also sets `homebrew.onActivation.upgrade = true`, so every switch upgrades every declared cask and brew that is already installed to its newest release.
+You never need a separate `brew upgrade`, but a rebuild can also pull in a new release you were not expecting.
+
 **About `herdr`:** it's in the `brews` list.
 It's a real public Homebrew formula (`brew info herdr` finds it in homebrew-core, no tap needed), so it will install fine.
 If you don't use it, just remove it from `brews` in your copy.
@@ -129,6 +132,7 @@ If you don't use it, skip that install.
 
 **About Claude Code:** it is *not* a Homebrew cask here.
 Install it with the native installer from the [quickstart](https://code.claude.com/docs/en/quickstart) (`curl -fsSL https://claude.ai/install.sh | bash`), which puts it in `~/.local/bin` (already on PATH via `home.sessionPath`) and updates itself in the background; run `claude update` to update right away.
+If a `claude-code` or `claude-code@latest` cask is still installed, run `brew uninstall --cask <that cask>` before your next rebuild: `cleanup = "zap"` would otherwise zap it, which also trashes `~/.claude.json` and other Claude Code state.
 
 **About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
 

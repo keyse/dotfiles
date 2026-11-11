@@ -34,6 +34,7 @@
     enable = true;
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
+    onActivation.upgrade = true;  # every rebuild upgrades all declared casks and brews
     onActivation.extraFlags = [ "--force" ];
     # Pi Launcher, Azure Functions Core Tools and tsk ship from their owners'
     # own taps, not homebrew-core. Declaring the taps here keeps
