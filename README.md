@@ -124,7 +124,7 @@ If you don't use it, just remove it from `brews` in your copy.
 
 **About the Aspire CLI:** it is *not* installed through Homebrew, despite what the [official install docs](https://aspire.dev/get-started/install-cli/) recommend for macOS.
 Microsoft's `microsoft/aspire` cask calls `write_file` inside `postflight_steps`, which Homebrew 6.0.1 does not define, and tapping it aborts the whole `darwin-rebuild` activation.
-Until that is fixed upstream, install it with `dotnet tool install -g aspire.cli`; `home.sessionPath` already puts `~/.dotnet/tools` on PATH.
+Until that is fixed upstream, install it with the script from the same docs (`curl -sSL https://aspire.dev/install.sh | bash`), which puts it in `~/.aspire/bin`; `home.sessionPath` already puts that folder on PATH.
 If you don't use it, skip that install.
 
 **About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
