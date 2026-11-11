@@ -30,6 +30,9 @@ in
     "${config.home.homeDirectory}/.dotnet/tools"
     # The Aspire CLI's install script (aspire.dev/install.sh) puts it here.
     "${config.home.homeDirectory}/.aspire/bin"
+    # Claude Code's native installer (claude.ai/install.sh) puts it here and
+    # it updates itself, so it is deliberately not a Homebrew cask.
+    "${config.home.homeDirectory}/.local/bin"
   ];
 
   # nodejs in the Nix store is read-only, so `npm install -g` fails with

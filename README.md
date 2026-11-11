@@ -127,6 +127,9 @@ Microsoft's `microsoft/aspire` cask calls `write_file` inside `postflight_steps`
 Until that is fixed upstream, install it with the script from the same docs (`curl -sSL https://aspire.dev/install.sh | bash`), which puts it in `~/.aspire/bin`; `home.sessionPath` already puts that folder on PATH.
 If you don't use it, skip that install.
 
+**About Claude Code:** it is *not* a Homebrew cask here.
+Install it with the native installer from the [quickstart](https://code.claude.com/docs/en/quickstart) (`curl -fsSL https://claude.ai/install.sh | bash`), which puts it in `~/.local/bin` (already on PATH via `home.sessionPath`) and updates itself in the background; run `claude update` to update right away.
+
 **About Pi Launcher:** the `kunchenguid/tap` tap and `kunchenguid/tap/pi-launcher` cask are declared too - see [Optional Pi configuration](#optional-pi-configuration).
 
 **Heads-up:**

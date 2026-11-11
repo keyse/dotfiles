@@ -62,7 +62,6 @@
     ];
     casks = [
       "wezterm"
-      "claude-code"
       # Fully qualified so Homebrew trusts this non-official tap's cask
       # during activation (HOMEBREW_REQUIRE_TAP_TRUST).
       "kunchenguid/tap/pi-launcher"
