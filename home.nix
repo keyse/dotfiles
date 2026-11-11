@@ -50,6 +50,13 @@ in
     syntaxHighlighting.enable = true;  # commands turn green when valid
     initContent = ''
       bindkey '^f' autosuggest-accept
+
+      # dotnetup (the .NET installer) appends this to ~/.zshrc itself, which
+      # replaces home-manager's symlink with a plain file and blocks every
+      # later switch. Declaring it here keeps it without the collision.
+      if [ -x "$HOME/.dotnetup/dotnetup" ]; then
+        eval "$("$HOME/.dotnetup/dotnetup" env script --shell zsh --dotnet --dotnetup)"
+      fi
     '';
     shellAliases = {
       ".." = "cd ..";
